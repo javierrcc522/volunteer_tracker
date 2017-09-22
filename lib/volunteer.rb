@@ -1,5 +1,5 @@
 class Volunteer
-  attr_reader(:name, :project_id,  :id)
+  attr_reader(:name, :project_id, :id)
 
   def initialize(attributes)
     @name = attributes.fetch(:name)
@@ -18,5 +18,32 @@ class Volunteer
     end
     volunteers
   end
+
+  def self.find(id)
+    found_volunteer = nil
+    Volunteer.all().each() do |volunteer|
+      if volunteer.id().==(id)
+        found_volunteer = volunteer
+      end
+    end
+    found_volunteer
+  end
+
+  def save
+    volunteer = DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', '#{@project_id}') RETURNING id;")
+    @id = volunteer.first().fetch('id').to_i()
+  end
+
+  def ==(another_volunteer)
+    (self.id==another_volunteer.id).&(self.name==another_volunteer.name).&(self.project_id==another_volunteer.project_id)
+  end
+
+
+
+
+
+
+
+
 
 end
