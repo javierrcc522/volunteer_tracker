@@ -1,0 +1,25 @@
+<h1>Welcome to my Project Managament App</h1>
+
+<p>Create a new project</p>
+
+<form action="/" method="post">
+  <label for="title">Let's make a project</label>
+  <input id="title" name="title" type="text">
+  <button type="submit">Create Project</button>
+</form>
+</div>
+
+<% if @projects.any? %>
+  <p>CLick on the project to see more information about it:</p>
+    <ul>
+      <% @projects.each do |project|%>
+      <li><a href="/projects/<% project.id() %>"><%= project.title() %></a></li>
+      <% end %>
+    </ul>
+    <% else %>
+  <p>There are no movies added yet!</p>
+<% end %>
+
+<p><a href="/volunteers">See all volunteers</a></p>
+
+<p><a href="/">Return to Main Page</a></p>

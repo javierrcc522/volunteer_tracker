@@ -8,11 +8,20 @@ require("pg")
 DB = PG.connect({:dbname => "volunteer_tracker"})
 
 get('/') do
+  @projects = Project.all()
   erb(:index)
 end
 
-post('/') do
-  volunteer = Volunteer.new({:name => params["name"], :project_id => params[1], :id => nil})
-  volunteer.save
-  erb(:index)#this reloads webpage
+
+post('/projects') do
+  title = params.fetch("title")
+  project = Project.new({:title => title, :id => nil})
+  project.save()
+  @projects = Project.all()
+  erb(:index)
+end
+
+get("/projects/:id") do
+  @projects = Project.find(params.fetch("id").to_i())
+  erb(:project)
 end
