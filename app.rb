@@ -12,6 +12,13 @@ get('/') do
   erb(:index)
 end
 
+get('/projects/') do
+
+  @projects = Project.find(params.fetch("id").to_i())
+  project = Project.new({:title => title, :id => nil})
+  erb(:project)
+end
+
 
 post('/projects') do
   title = params.fetch("title")
@@ -21,7 +28,15 @@ post('/projects') do
   erb(:index)
 end
 
-get("/projects/:id") do
+# this is to update the project
+get("/projects/:id/edit") do
   @projects = Project.find(params.fetch("id").to_i())
+  erb(:project_edit)
+end
+
+patch("/projects/:id") do
+  title = params.fetch("title")
+  @projects = Project.find(params.fetch("id").to_i())
+  @projects.update({:title => title})
   erb(:project)
 end
