@@ -1,25 +1,23 @@
-<h1>Welcome to my Project Managament App</h1>
-
-<p>Create a new project</p>
-
-<form action="/projects" method="post">
-  <label for="title">Let's make a project</label>
-  <input id="title" name="title" type="text">
-  <button type="submit">Create Project</button>
-</form>
-</div>
+<h1>Welcome to Project Managament App</h1>
 
 <% if @projects.any? %>
   <p>CLick on the project to see more information about it:</p>
-    <ul>
-      <% @projects.each do |project|%>
-      <li><a href="/projects/<% project.id() %>"><%= project.title() %></a></li>
-      <% end %>
-    </ul>
+
+    <% @projects.each do |project| %>
+    <h5><a href="/projects/<%= project.id() %>"><%= project.title() %></a><h5>
+    <% end %>
+
     <% else %>
   <p>There are no projects added yet!</p>
 <% end %>
 
-<p><a href="/volunteers">See all volunteers</a></p>
+<h2>Create a new project</h2>
+
+<form action="/projects" method="post">
+  <label for="title">Let's make a project</label>
+  <input name="title" type="text" placeholder="....project">
+
+  <button type="submit">Create Project</button>
+</form>
 
 <p><a href="/">Return to Main Page</a></p>
