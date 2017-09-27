@@ -17,7 +17,7 @@ get('/') do
 end
 
 #  ** -CREATE NEW PROJECT: create**
-post('/projects') do
+post('/projects/new') do
   title = params.fetch("title")
   project = Project.new({:id => nil, :title => title})
   project.save()
@@ -25,14 +25,10 @@ post('/projects') do
   erb(:index)
 end
 
-
-
-
-
-# -** READ INDIVIDIAL: show
-get("/projects/:id") do
-  @project_id = params.fetch("id")
+# -** READ INDIVIDIAL PROJECT: update
+get("/projects/new:id") do
   @project = Project.find(params.fetch("id").to_i())
+  @project_id = params.fetch("id")
   erb(:project_show)
 end
 
