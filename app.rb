@@ -15,8 +15,7 @@ get('/') do
   @projects = Project.all()
   erb(:index)
 end
-
-#  ** -CREATE NEW PROJECT: create**
+#  ** -make more PROJECT:**
 post('/projects/new') do
   title = params.fetch("title")
   project = Project.new({:id => nil, :title => title})
@@ -25,43 +24,39 @@ post('/projects/new') do
   erb(:index)
 end
 
-# -** READ INDIVIDIAL PROJECT: update
-get("/projects/new:id") do
-  @project = Project.find(params.fetch("id").to_i())
-  @project_id = params.fetch("id")
-  erb(:project_show)
+# this is so i can click in the link and take me to project_edit
+get("/projects/:id") do
+  @projects = Project.find(params["id"].to_i())
+  erb(:project_edit)
 end
 
 
 
 
 
+
+
+
+# - Form for UPDATING: projects
 get("/projects/:id/edit") do
   @projects = Project.find(params.fetch("id").to_i())
-  erb(:project_edit)
+  erb(:projects)
 end
 
-# - Form for UPDATING: edit
-get("/projects/:id/edit") do
-  project = Project.new({:title => title, :id => nil})
-  project.save()
-  erb(:project_edit)
-end
   #  ** -UPDATE PROJECT: update **
-patch("/projects/:id") do
+patch("/projects/:id/edit") do
+  projects = Project.find(params[:id])
   title = params.fetch("title")
-  project = Project.new({:title => title, :id => nil})
-  project.save()
-  @projects = Project.all()
-  erb(:index)
+  projects.update({:title => title})
+  redirect("/projects/#{params[:id]}/edit")
 end
 
-patch("/projects/:id") do
-  title = params.fetch("title")
-  @projects = Project.find(params.fetch("id").to_i())
-  @projects.update({:title => title})
-  erb(:project)
-end
+# patch("/projects/:id") do
+#   title = params.fetch("title")
+#   @projects = Project.find(params.fetch("id").to_i())
+#   @projects.update({:title => title})
+#   erb(:project)
+# end
 
 
 

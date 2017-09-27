@@ -1,44 +1,12 @@
-<h1><%= @projects.title() %></h1>
-
-<% if @projects.volunteers().any?() %>
-  <h3>Here are all the volunteers in this project:</h3>
-
-  <ul>
-    <% @projects.volunteers().each() do |project| %>
-      <li><%= volunteer.description() %> </li>
-    <% end %>
-  </ul>
-
-  <% else %>
-    <p>There are no volunteers on this list!</p>
-  <% end %>
-
-<div class="container">
-  <a href="/"><button class="btn">Home</a>
-</div>
+<h1>You have created this project: <strong> <%=@projects.title() %></strong> successfully</h1>
 
 
 
-
-
-
-
-<!-- <h3>Add a task to <%= @list.name() %> </h3>
-
-<form action="/tasks" method="post">
-  <input id="list_id" name="list_id" type="hidden" value="<%= @list.id() %>">
-
-  <label for="description">Description of the task:</label>
-  <input id="description" name="description" type="text">
-
-  <button type="submit">Add task</button>
+<form action="/projects/<%= @projects.id %>/edit" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <label for="title">Rename this project:</label>
+  <input name="title" type="text">
+  <button type="submit">Update Project</button>
 </form>
 
-<hr>
-
-<div class="container">
-  <a href="/">Home</a>
-  <a href="/lists">View All Lists</a>
-  <a href="/lists/new">Add New List</a>
-  <a href="/lists/new">Add New Task</a>
-</div> -->
+<h5><a href="/">Return Home</a></h5>
