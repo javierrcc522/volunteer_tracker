@@ -15,6 +15,13 @@ get('/') do
   @projects = Project.all()
   erb(:index)
 end
+
+# this is so i can click in the link and take me to project_edit
+get("/projects/:id") do
+  @projects = Project.find(params["id"].to_i())
+  erb(:project_edit)
+end
+
 #  ** -make more PROJECT:**
 post('/projects/new') do
   title = params.fetch("title")
@@ -23,19 +30,6 @@ post('/projects/new') do
   @projects = Project.all()
   erb(:index)
 end
-
-# this is so i can click in the link and take me to project_edit
-get("/projects/:id") do
-  @projects = Project.find(params["id"].to_i())
-  erb(:project_edit)
-end
-
-
-
-
-
-
-
 
 # - Form for UPDATING: projects
 get("/projects/:id/edit") do
@@ -51,18 +45,9 @@ patch("/projects/:id/edit") do
   redirect("/projects/#{params[:id]}/edit")
 end
 
-# patch("/projects/:id") do
-#   title = params.fetch("title")
-#   @projects = Project.find(params.fetch("id").to_i())
-#   @projects.update({:title => title})
-#   erb(:project)
-# end
-
-
-
-
-
 # --** DESTROY PROJECT: destroy--
-
-delete('/projects/:id') do
+delete('/projects/:id/edit') do
+  @projects = Project.find(params[:id])
+  @projects.delete
+  redirect('/')
 end

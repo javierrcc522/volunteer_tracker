@@ -1,4 +1,4 @@
-<h1>You have created this project: <strong> <%=@projects.title() %></strong> successfully</h1>
+<h1>You have created this project: <strong> <%=@projects.title() %></strong> and now you can update it!</h1>
 
 
 
@@ -7,6 +7,12 @@
   <label for="title">Rename this project:</label>
   <input name="title" type="text">
   <button type="submit">Update Project</button>
+</form>
+
+<form action='/projects/<%= @projects.id %>/edit' method="post">
+  <input name="_method" type="hidden" value="delete">
+  <button type="submit">Delete Project</button>
+
 </form>
 
 <h5><a href="/">Return Home</a></h5>
