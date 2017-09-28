@@ -16,20 +16,43 @@ get('/') do
   erb(:index)
 end
 
-# this is so i can click in the link and take me to project_edit
-get("/projects/:id") do
-  @projects = Project.find(params["id"].to_i())
-  erb(:project_edit)
-end
-
 #  ** -make more PROJECT:**
-post('/projects/new') do
+post('/projects') do
   title = params.fetch("title")
   project = Project.new({:id => nil, :title => title})
   project.save()
   @projects = Project.all()
   erb(:index)
 end
+
+
+
+
+
+# this is so i can click in the link and take me to project_edit
+get("/projects/:id") do
+  @projects = Project.find(params["id"].to_i())
+
+  erb(:project_edit)
+
+end
+post("/projects/:id") do
+  id = params[:id]
+  name = params['name']
+  volunteer = Volunteer.new({:name => name, :project_id => id})
+  volunteer.save
+  redirect("/projects/#{id}")
+end
+
+
+
+
+
+
+
+
+
+
 
 # - Form for UPDATING: projects
 get("/projects/:id/edit") do

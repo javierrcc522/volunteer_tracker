@@ -4,7 +4,7 @@ class Volunteer
   def initialize(attributes)
     @name = attributes.fetch(:name)
     @project_id = attributes.fetch(:project_id)
-    @id = attributes.fetch(:id)
+    @id = attributes[:id]
   end
 
   def self.all

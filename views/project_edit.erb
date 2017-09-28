@@ -1,4 +1,20 @@
-<h1>You have created this project: <strong> <%=@projects.title() %></strong> successfully</h1>
+<h1>You have created project: <strong> <%=@projects.title() %></strong> successfully</h1>
 
 
+<form action="/projects/<%= @projects.id %>" method="post">
+  <div class="form-group">
+    <label for="name">Add a volunteer: </label>
+    <input name="name" id="name"  class="form-control" type="text" placeholder="....volu"><br>>
+    <button type="submit" class="btn btn-info">Add volunteer</button>
+  </div>
+</form>
+<% if @projects.volunteers.any? %>
+  <ol>
+    <% @projects.volunteers.each do |vol| %>
+      <li><%= vol.name %></li>
+    <% end %>
+  </ol>
+<% end %>
 <h4><a href="/projects/<%= @projects.id %>/edit">Edit Project</a></h4>
+
+<a href="/">Return to Main Page</a>
