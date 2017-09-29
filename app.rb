@@ -25,10 +25,6 @@ post('/projects') do
   erb(:index)
 end
 
-
-
-
-
 # this is so i can click in the link and take me to project_edit
 get("/projects/:id") do
   @projects = Project.find(params["id"].to_i())
@@ -43,16 +39,6 @@ post("/projects/:id") do
   volunteer.save
   redirect("/projects/#{id}")
 end
-
-
-
-
-
-
-
-
-
-
 
 # - Form for UPDATING: projects
 get("/projects/:id/edit") do
